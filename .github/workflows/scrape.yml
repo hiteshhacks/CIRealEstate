@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 sqlalchemy
+          pip install requests beautifulsoup4 sqlalchemy pandas
 
       # 4. Run the scraper
       - name: Run scraper
