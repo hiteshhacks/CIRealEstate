@@ -32,7 +32,7 @@ jobs:
       # 4. Run the scraper
       - name: Run scraper
         run: python scraper.py
-        working-directory: ./app
+        
 
       # 5. Commit & push the updated database back to the repo
       - name: Commit and push database
