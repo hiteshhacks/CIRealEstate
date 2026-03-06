@@ -1,0 +1,44 @@
+name: Scheduled Scraper
+
+on:
+  # ⏰ Runs automatically on a cron schedule (UTC timezone)
+  schedule:
+    - cron: "0 */6 * * *"    # Every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+
+  # 🖱️ Also allows you to trigger it manually from the GitHub UI
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repo code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 sqlalchemy
+
+      # 4. Run the scraper
+      - name: Run scraper
+        run: python scraper.py
+        working-directory: ./app
+
+      # 5. Commit & push the updated database back to the repo
+      - name: Commit and push database
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "🤖 Auto-scrape: update database [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          git push
