@@ -1,0 +1,44 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Streamlit cache
+.streamlit/
+
+# Prophet / CmdStan build files
+cmdstanpy/
+*.hpp
+*.o
+*.obj
+*.exe
+
+# Data files (optional - if large)
+*.csv
+*.xlsx
+*.xls
+
+# But keep small required CSVs tracked
+!nagpur_real_estate_cleaned.csv
+!forecast_summary.csv
+!locality_stats.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
